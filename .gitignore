@@ -1,0 +1,7 @@
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+sql_app.db
+output/*.jpg
+!output/.gitkeep
