@@ -14,11 +14,13 @@ High-performance backend service built with **FastAPI** and **SQLite** to genera
 - **Fault-Tolerant & Isolated Failures**: If one recipient has invalid data or fails generation, it does not stop the other certificates in the batch. The job gracefully reports `PARTIAL_SUCCESS`.
 - **Status Tracking & Asset Retrieval**: Check job progress via `GET /jobs/{id}` and download finalized JPGs via `GET /certificates/{id}/download`.
 - **Interactive UI**: Includes a clean tester at `http://127.0.0.1:8000/` and standard Swagger documentation at `/docs`.
+- **Docker & Cloud Ready**: Fully containerized with a `Dockerfile` and `render.yaml` for instant deployment.
 
 ---
 
 ## Setup Instructions
 
+### Local Environment
 1. **Create and activate a virtual environment:**
    ```bash
    python -m venv venv
@@ -38,15 +40,19 @@ High-performance backend service built with **FastAPI** and **SQLite** to genera
    python setup_assets.py
    ```
 
+4. **Run the server:**
+   ```bash
+   uvicorn app.main:app --reload
+   ```
+
 ---
 
-## Running the Application
-
+### Docker Deployment
+Build and run the container locally:
 ```bash
-uvicorn app.main:app --reload
+docker build -t bulk-cert-api .
+docker run -p 8000:8000 bulk-cert-api
 ```
-- **Interactive Tester:** [http://127.0.0.1:8000/](http://127.0.0.1:8000/)
-- **Swagger Documentation:** [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
 
 ---
 
@@ -75,7 +81,7 @@ python -m pytest tests/test_api.py
 ```
 
 #### Option B: Upload CSV File
-`POST /jobs/upload-csv`
+`POST /jobs/upload-csv`  
 Upload any `.csv` file containing `name` and `course` headers or comma-separated rows.
 
 #### Option C: Paste Raw CSV Text
@@ -118,3 +124,4 @@ Returns the generated certificate image (`image/jpeg`).
 - **FastAPI + BackgroundTasks**: Offers high concurrency for I/O operations without the overhead of external message brokers (like Celery/RabbitMQ) for single-node deployments.
 - **SQLite (SQLAlchemy ORM)**: Provides reliable relational data persistence with zero setup friction for evaluators.
 - **Pillow (PIL)**: Lightweight, high-speed image processing for dynamic text placement and typography.
+- **Containerization**: Standardized container environment via `Dockerfile` ensures consistent execution across cloud providers.
