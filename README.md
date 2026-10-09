@@ -4,6 +4,17 @@ High-performance backend service built with **FastAPI** and **SQLite** to genera
 
 ---
 
+## 🚀 Live Demo & Deployment
+
+The application is deployed live and fully interactive:
+
+* **Live Interactive Tester:** [https://bulk-certificate-generator-api-q2u0.onrender.com/](https://bulk-certificate-generator-api-q2u0.onrender.com/)
+* **Live Swagger API Documentation:** [https://bulk-certificate-generator-api-q2u0.onrender.com/docs](https://bulk-certificate-generator-api-q2u0.onrender.com/docs)
+
+*(Note: Free-tier instances may take a few seconds to spin up on initial cold start.)*
+
+---
+
 ## Features & Highlights
 
 - **Multiple Input Formats**: Submit jobs via:
@@ -13,7 +24,7 @@ High-performance backend service built with **FastAPI** and **SQLite** to genera
 - **Asynchronous Execution**: Uses FastAPI `BackgroundTasks` to offload image generation so API requests return immediately with HTTP 202 Accepted.
 - **Fault-Tolerant & Isolated Failures**: If one recipient has invalid data or fails generation, it does not stop the other certificates in the batch. The job gracefully reports `PARTIAL_SUCCESS`.
 - **Status Tracking & Asset Retrieval**: Check job progress via `GET /jobs/{id}` and download finalized JPGs via `GET /certificates/{id}/download`.
-- **Interactive UI**: Includes a clean tester at `http://127.0.0.1:8000/` and standard Swagger documentation at `/docs`.
+- **Interactive UI**: Includes a clean tester at root `/` and standard Swagger documentation at `/docs`.
 - **Docker & Cloud Ready**: Fully containerized with a `Dockerfile` and `render.yaml` for instant deployment.
 
 ---
@@ -44,6 +55,9 @@ High-performance backend service built with **FastAPI** and **SQLite** to genera
    ```bash
    uvicorn app.main:app --reload
    ```
+   Access locally at:
+   - Interactive Tester: `http://127.0.0.1:8000/`
+   - Swagger Docs: `http://127.0.0.1:8000/docs`
 
 ---
 
